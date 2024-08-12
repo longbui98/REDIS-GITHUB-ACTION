@@ -29,11 +29,6 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean package
-    - name: Archive the JAR file
-      uses: actions/upload-artifact@v3
-      with:
-          name: redis-github-actions
-          path: target/*.jar
     - name: Verifying jar file
       run: ls -lh target/
     - name: Build & push Docker image
