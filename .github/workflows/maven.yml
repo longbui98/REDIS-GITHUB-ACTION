@@ -29,10 +29,13 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean package
-    - name: Check after build package
-      run: ls -lh target/
-    - uses: mr-smithers-excellent/docker-build-push@v6
-      name: Build & push Docker image
+    - name: Archive the JAR file
+      uses: actions/upload-artifact@v3
+      with:
+          name: redis-github-actions
+          path: target/*.jar
+    - name: Build & push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v6
       with:
         image: longtony/redis-github-actions
         tags: v1
